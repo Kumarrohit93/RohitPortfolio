@@ -1,0 +1,96 @@
+<% layout("/Boilerplate/boilerplate.ejs") %>
+
+<section class="w-full py-16 bg-gray-50">
+
+  <!-- Heading -->
+  <div class="text-center mb-12 px-6">
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-900">
+      My <span class="text-orange-500">Blog</span>
+    </h1>
+
+    <p class="text-gray-600 mt-3 max-w-2xl mx-auto">
+      Insights on backend development, authentication, database design, and building scalable applications.
+    </p>
+  </div>
+
+  <!-- Blog Grid -->
+  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
+
+    <% if(blogs.length === 0) { %>
+
+      <p class="col-span-full text-center text-gray-500 text-lg font-semibold">
+        No blogs published yet
+      </p>
+
+    <% } %>
+
+
+    <% blogs.forEach((blog) => { %>
+
+      <!-- Card -->
+      <a href="/blog/<%= blog.slug %>" 
+         class="bg-white rounded-xl shadow-sm hover:shadow-lg transition duration-300 border border-gray-200 overflow-hidden group">
+
+        <!-- Image -->
+        <div class="overflow-hidden">
+          <img 
+            src="<%= blog.coverImage %>" 
+            alt="<%= blog.title %>"
+            class="w-full h-48 object-cover group-hover:scale-105 transition duration-300"
+          >
+        </div>
+
+        <!-- Content -->
+        <div class="p-5">
+
+          <!-- Category + Read Time -->
+          <div class="flex justify-between items-center text-sm mb-2">
+
+            <span class="bg-orange-100 text-orange-600 px-2 py-1 rounded font-medium">
+              <%= blog.category %>
+            </span>
+
+            <span class="text-gray-500">
+              <i class="fa-regular fa-clock"></i>
+              <%= blog.readTime %> min read
+            </span>
+
+          </div>
+
+          <!-- Title -->
+          <h2 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-orange-500 transition">
+            <%= blog.title %>
+          </h2>
+
+          <!-- Preview -->
+          <p class="text-gray-600 text-sm mb-4">
+            <%= blog.content.substring(0, 120) %>...
+          </p>
+
+          <!-- Footer -->
+          <div class="flex justify-between items-center text-sm text-gray-500">
+
+            <span>
+              <i class="fa-regular fa-calendar"></i>
+              <%= blog.createdAt.toDateString() %>
+            </span>
+
+            <p>
+              <span>Views: </span><%= blog.views %>
+            </p>
+
+            <span class="text-orange-500 font-semibold group-hover:underline">
+              Read More →
+            </span>
+
+          </div>
+
+        </div>
+
+      </a>
+
+    <% }) %>
+
+  </div>
+
+</section>

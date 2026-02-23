@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+  <body class="bg-white">
+    <nav class="flex justify-between items-center py-4 px-6 md:px-10 shadow-sm">
+      <div class="flex gap-4 items-center text-xl text-gray-600">
+        <a href="https://x.com/RohitKumar80391">
+          <i
+            class="fa-brands fa-x-twitter cursor-pointer hover:text-orange-500"
+          ></i>
+        </a>
+
+        <a href="www.linkedin.com/in/rohit-kumar-0a1435262">
+          <i
+            class="fa-brands fa-linkedin cursor-pointer hover:text-orange-500"
+          ></i>
+        </a>
+
+        <a href="https://github.com/Kumarrohit93">
+          <i
+            class="fa-brands fa-github cursor-pointer hover:text-orange-500"
+          ></i>
+        </a>
+
+        <a href="mailto:kumarhimanshu7988@gmail.com">
+          <i class="fa-solid fa-envelope cursor-pointer hover:text-orange-500"></i>
+        </a>
+      </div>
+      <ul class="hidden md:flex gap-10 text-gray-700 font-semibold">
+        <a href="/home"
+          ><li class="cursor-pointer hover:text-orange-500">Home</li></a
+        >
+        <a href="/mywork"
+          ><li class="cursor-pointer hover:text-orange-500">My Work</li></a
+        >
+        <a href="/blog"
+          ><li class="cursor-pointer hover:text-orange-500">Blog</li></a
+        >
+        <a href="/services"
+          ><li class="cursor-pointer hover:text-orange-500">Services</li></a
+        >
+        <!-- <a href="/contact"
+          ><li class="cursor-pointer hover:text-orange-500">Contact</li></a
+        > -->
+      </ul>
+
+      <div class="flex items-center gap-4">
+        <a href="mailto:kumarhimanshu7988@gmail.com">
+          <button
+            class="hidden md:block bg-[#FA6920] hover:bg-orange-600 text-white font-semibold rounded-md py-2 px-5 transition"
+          >
+            Hire Me
+          </button>
+        </a>
+
+        <button id="menuBtn" class="md:hidden text-2xl">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+    <div
+      id="sidebar"
+      class="fixed top-0 right-[-100%] w-64 h-full bg-orange-50 shadow-lg transition-all duration-300 z-50"
+    >
+      <div class="flex justify-end p-4">
+        <button id="closeBtn" class="text-2xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <ul class="flex flex-col gap-6 px-6 text-lg font-semibold text-gray-700">
+        <a href="/home"
+          ><li class="cursor-pointer hover:text-orange-500">Home</li></a
+        >
+        <a href="/mywork"
+          ><li class="cursor-pointer hover:text-orange-500">My Work</li></a
+        >
+        <a href="/blog"
+          ><li class="cursor-pointer hover:text-orange-500">Blog</li></a
+        >
+        <a href="/services"
+          ><li class="cursor-pointer hover:text-orange-500">Services</li></a
+        >
+        <!-- <a href="/contact"
+          ><li class="cursor-pointer hover:text-orange-500">Contact</li></a
+        > -->
+
+        <button
+          class="mt-4 bg-[#FA6920] hover:bg-orange-600 text-white py-2 rounded-md"
+        >
+          Hire Me
+        </button>
+      </ul>
+    </div>
+    <div id="overlay" class="fixed inset-0 bg-black/30 hidden z-40"></div>
+    <%- body %>
+
+    <footer class="bg-gray-900 text-gray-300">
+      <div
+        class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10"
+      >
+        <div>
+          <h2 class="text-2xl font-bold text-white">Rohit Kumar</h2>
+
+          <p class="mt-3 text-sm text-gray-400 max-w-sm">
+            Full Stack Developer focused on building fast, scalable, and
+            user-friendly web applications using modern technologies like MERN
+            stack.
+          </p>
+
+          <div class="flex gap-4 mt-4 text-xl">
+            <a href="https://github.com/Kumarrohit93" class="hover:text-orange-400 transition">
+              <i class="fa-brands fa-github"></i>
+            </a>
+
+            <a href="www.linkedin.com/in/rohit-kumar-0a1435262" class="hover:text-orange-400 transition">
+              <i class="fa-brands fa-linkedin"></i>
+            </a>
+
+            <a href="https://x.com/RohitKumar80391" class="hover:text-orange-400 transition">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+
+            <a href="mailto:kumarhimanshu7988@gmail.com" class="hover:text-orange-400 transition">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Navigation</h3>
+
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="/home" class="hover:text-orange-400 transition">
+                Home
+              </a>
+            </li>
+
+            <li>
+              <a href="/mywork" class="hover:text-orange-400 transition">
+                My Work
+              </a>
+            </li>
+
+            <li>
+              <a href="/blog" class="hover:text-orange-400 transition">
+                Blog
+              </a>
+            </li>
+
+            <li>
+              <a href="/services" class="hover:text-orange-400 transition">
+                Services
+              </a>
+            </li>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Contact</h3>
+
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-envelope text-orange-400"></i>
+              kumarhimanshu7988@email.com
+            </li>
+
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-phone text-orange-400"></i>
+              +91 93066 64193
+            </li>
+
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-location-dot text-orange-400"></i>
+              Haryana, India
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800">
+        <div
+          class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500"
+        >
+          <p>© 2026 Rohit Kumar. All rights reserved.</p>
+
+          <p class="mt-2 md:mt-0">
+            Built with <span class="text-orange-400 text-xl">🧡</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      const menuBtn = document.getElementById("menuBtn");
+      const closeBtn = document.getElementById("closeBtn");
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+
+      menuBtn.onclick = () => {
+        sidebar.style.right = "0";
+        overlay.classList.remove("hidden");
+      };
+
+      closeBtn.onclick = closeMenu;
+      overlay.onclick = closeMenu;
+
+      function closeMenu() {
+        sidebar.style.right = "-100%";
+        overlay.classList.add("hidden");
+      }
+    </script>
+  </body>
+</html>

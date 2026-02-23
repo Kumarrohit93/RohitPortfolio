@@ -1,0 +1,232 @@
+<% layout("/boilerplate/adminboilerplate.ejs") %>
+
+<section class="flex flex-col items-center p-6 gap-4">
+
+  <!-- Heading -->
+  <div class="text-center">
+
+    <h1 class="text-3xl font-bold text-gray-900">
+      My <span class="text-orange-500">Development Work</span>
+    </h1>
+
+    <p class="text-gray-600">
+      Diverse Range of Projects from desktop to web Applications
+    </p>
+<button
+    id="reviewBtn"
+    class="bg-[#FA6920] hover:bg-orange-600 text-white  mt-4 px-6 py-2 rounded-md font-semibold transition"
+  >
+    Create a Project
+  </button>
+  </div>
+
+
+  <!-- Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10 w-full max-w-7xl">
+
+
+    <% projectData.forEach((project) => { %>
+
+      <div
+        class="flex flex-col justify-between p-6 border border-gray-200 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition"
+      >
+        <div class="flex justify-between items-center mb-4">
+
+          <% if(project.liveLink) { %>
+
+            <span class="bg-orange-200 px-2 py-1 rounded text-xs font-semibold">
+              Deployed
+            </span>
+
+          <% } else { %>
+
+            <span class="bg-gray-200 px-2 py-1 rounded text-xs font-semibold">
+              Not Live
+            </span>
+
+          <% } %>
+
+          <span class="bg-blue-200 px-2 py-1 rounded text-xs font-semibold">
+            Project
+          </span>
+
+        </div>
+
+        <div>
+
+          <h2 class="text-lg font-bold text-gray-800 mb-2">
+            <%= project.title %>
+          </h2>
+
+          <p class="text-sm text-gray-600 mb-4">
+            <%= project.description.split(" ").slice(0, 20).join(" ") %>
+          </p>
+
+        </div>
+
+        <div>
+             <form action="/admin/<%= project._id %>/project?_method=DELETE" method="post">
+        <Button class="bg-[#FA6920] hover:bg-orange-600 text-white px-6 py-2 rounded-md font-semibold transition">Delete</Button>
+
+        </form>
+        </div>
+      </div>
+
+    <% }) %>
+
+
+  </div>
+
+</section>
+
+<section class="flex flex-col items-center justify-center ">
+
+  <form
+      action="/admin/create-projects"
+      method="POST"
+      id="form"
+      class="hidden mt-4 w-full max-w-2xl bg-white p-8 rounded-lg shadow-md space-y-6"
+    >
+      <h2 class="text-2xl font-bold text-center">
+        Create <span class="text-orange-500">Project</span>
+      </h2>
+<div>
+       <button
+        type="button"
+        id="closeBtn"
+        class="text-gray-500 hover:text-red-500 mt-[-1.5rem] text-2xl transition"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+      <div>
+        <label class="font-semibold">Title</label>
+        <input
+          name="title"
+          required
+          class="w-full border p-2 rounded mt-1 focus:ring-2 focus:ring-orange-400"
+        />
+      </div>
+
+      <div>
+        <label class="font-semibold">Description</label>
+        <textarea
+          name="description"
+          required
+          class="w-full border p-2 rounded mt-1 focus:ring-2 focus:ring-orange-400"
+        ></textarea>
+      </div>
+
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <label class="font-semibold">Tech Stack</label>
+
+          <button
+            type="button"
+            onclick="addTech()"
+            class="bg-orange-500 text-white px-3 py-1 rounded text-sm"
+          >
+            + Add Tech
+          </button>
+        </div>
+
+        <div id="techContainer" class="space-y-2">
+          <input
+            name="techStack[]"
+            class="w-full border p-2 rounded focus:ring-2 focus:ring-orange-400"
+            placeholder="React"
+          />
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <label class="font-semibold">Images</label>
+
+          <button
+            type="button"
+            onclick="addImage()"
+            class="bg-orange-500 text-white px-3 py-1 rounded text-sm"
+          >
+            + Add Image
+          </button>
+        </div>
+
+        <div id="imageContainer" class="space-y-2">
+          <input
+            name="images[]"
+            class="w-full border p-2 rounded focus:ring-2 focus:ring-orange-400"
+            placeholder="https://image-url"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label class="font-semibold">Live Link</label>
+        <input
+          name="liveLink"
+          required
+          class="w-full border p-2 rounded focus:ring-2 focus:ring-orange-400"
+        />
+      </div>
+
+      <div>
+        <label class="font-semibold">GitHub Link</label>
+        <input
+          name="githubLink"
+          required
+          class="w-full border p-2 rounded focus:ring-2 focus:ring-orange-400"
+        />
+      </div>
+      <button
+        class="w-full bg-orange-500 hover:bg-orange-600 text-white p-2 rounded font-semibold"
+      >
+        Create Project
+      </button>
+    </form>
+</section>
+
+ <script>
+document.addEventListener("click", function (e) {
+    const form = document.getElementById("form");
+
+    if (e.target.closest("#reviewBtn")) {
+      form.classList.remove("hidden");
+    }
+
+    if (e.target.closest("#closeBtn")) {
+      e.preventDefault();
+      form.classList.add("hidden");
+    }
+  });
+
+      function addTech() {
+        const container = document.getElementById("techContainer");
+
+        const input = document.createElement("input");
+
+        input.name = "techStack[]";
+
+        input.className =
+          "w-full border p-2 rounded focus:ring-2 focus:ring-orange-400 mt-2";
+
+        input.placeholder = "Node.js";
+
+        container.appendChild(input);
+      }
+
+      function addImage() {
+        const container = document.getElementById("imageContainer");
+
+        const input = document.createElement("input");
+
+        input.name = "images[]";
+
+        input.className =
+          "w-full border p-2 rounded focus:ring-2 focus:ring-orange-400 mt-2";
+
+        input.placeholder = "https://image-url";
+
+        container.appendChild(input);
+      }
+    </script>
