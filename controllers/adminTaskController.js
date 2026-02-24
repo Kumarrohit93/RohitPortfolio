@@ -106,6 +106,21 @@ const getDashboard = async (req, res) => {
   const monthPercent =
     monthTotal === 0 ? 0 : Math.round((monthCompleted / monthTotal) * 100);
 
+    const yearStart = new Date(new Date().getFullYear(), 0, 1)
+    const yearEnd = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59)
+
+    const yearCompeleted = await taskCompletion({
+      date: {
+        $gte: yearStart,
+        $lte: yearEnd
+      }
+    })
+
+    const totalDays = 365;
+    const totalPossible = totalTasks * totalDays
+
+    const productivity = ((yearCompeleted / totalPossible) * 100).toFixed(2)
+
   res.render("./Admin/home.ejs", {
     project,
     reviewData,
@@ -120,6 +135,7 @@ const getDashboard = async (req, res) => {
     weekPercent,
     monthCompleted,
     monthPercent,
+    productivity
   });
 };
 
@@ -147,3 +163,4 @@ module.exports = {
   getDashboard,
   completeTask,
 };
+
