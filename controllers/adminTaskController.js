@@ -135,7 +135,8 @@ const getDashboard = async (req, res) => {
     weekPercent,
     monthCompleted,
     monthPercent,
-    productivity
+    productivity,
+    yearCompeleted
   });
 };
 
