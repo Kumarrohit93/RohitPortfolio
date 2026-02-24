@@ -109,14 +109,14 @@ const getDashboard = async (req, res) => {
     const yearStart = new Date(new Date().getFullYear(), 0, 1)
     const yearEnd = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59)
 
-    const yearCompeleted = await taskCompletion({
+    const yearCompeleted = await taskCompletion.countDocuments({
       date: {
         $gte: yearStart,
         $lte: yearEnd
       }
     })
 
-    const totalDays = 365;
+    const totalDays = Math.floor((now - yearStart) / (1000 * 60 * 60 * 24));
     const totalPossible = totalTasks * totalDays
 
     const productivity = ((yearCompeleted / totalPossible) * 100).toFixed(2)
