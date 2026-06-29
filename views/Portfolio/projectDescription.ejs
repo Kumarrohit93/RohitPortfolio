@@ -1,107 +1,86 @@
 <% layout("/Boilerplate/boilerplate.ejs") %>
 
-<section class="max-w-6xl mx-auto py-16 px-6">
-  <div class="grid md:grid-cols-1 gap-10 items-center">
-    <div>
-
-      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-        <%= project.title %>
-      </h1>
-
-      <p class="text-gray-600 mb-6">
-        <%= project.description %>
-      </p>
-    <div>
-      <img 
-        src="<%= project.images || '../images/rohit1.jpg' %>" 
-        class="w-full rounded-xl shadow-md object-cover"
-      >
+<section class="max-w-5xl mx-auto py-16 px-6 sm:px-8 lg:px-12">
+  
+  <!-- Hero Section of Project -->
+  <div class="reveal flex flex-col items-center text-center mb-12">
+    <div class="inline-flex items-center gap-2 px-3 py-1 bg-orange-50 text-orange-600 rounded-full text-xs font-semibold tracking-wide uppercase mb-6 ring-1 ring-orange-500/20">
+      <span class="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+      Project Case Study
     </div>
-      <div class="flex flex-wrap gap-2 mb-6 mt-6">
-
-        <% project.techStack.forEach((tech) => { %>
-
-          <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded text-sm font-medium">
-            <%= tech %>
-          </span>
-
-        <% }) %>
-
-      </div>
-
-      <!-- Buttons -->
-      <div class="flex gap-4">
-
-        <% if(project.liveLink) { %>
-
-          <a href="<%= project.liveLink %>" target="_blank"
-             class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold transition">
-
-             Live Demo
-
-          </a>
-
-        <% } %>
-
-
-        <% if(project.githubLink) { %>
-
-          <a href="<%= project.githubLink %>" target="_blank"
-             class="bg-gray-800 hover:bg-black text-white px-5 py-2 rounded-lg font-semibold transition">
-
-             GitHub
-
-          </a>
-
-        <% } %>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- Detailed Section -->
-  <div class="mt-16">
-
-    <h2 class="text-2xl font-bold mb-4">
-      Project Overview
-    </h2>
-
-    <p class="text-gray-700 leading-relaxed whitespace-pre-line">
-      <%= project.fullDescription || project.description %>
+    <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-6">
+      <%= project.title %>
+    </h1>
+    <p class="text-lg text-gray-500 max-w-3xl leading-relaxed">
+      <%= project.description %>
     </p>
-
-  </div>
-
-  <% if(project.features && project.features.length > 0) { %>
-
-  <div class="mt-12">
-
-    <h2 class="text-2xl font-bold mb-4">
-      Key Features
-    </h2>
-
-    <ul class="space-y-2">
-
-      <% project.features.forEach((feature) => { %>
-
-        <li class="flex items-center gap-2 text-gray-700">
-
-          <i class="fa-solid fa-circle-check text-orange-500"></i>
-
-          <%= feature %>
-
-        </li>
-
+    
+    <div class="flex flex-wrap justify-center gap-2 mt-8">
+      <% project.techStack.forEach((tech) => { %>
+        <span class="bg-white text-gray-600 border border-gray-200 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm">
+          <%= tech %>
+        </span>
       <% }) %>
-
-    </ul>
-
+    </div>
   </div>
 
-  <% } %>
+  <!-- Image Showcase -->
+  <div class="reveal w-full mb-16 relative group">
+    <div class="absolute -inset-1 bg-gradient-to-r from-orange-400 to-[#FA6920] rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+    <img 
+      src="<%= project.images || '../images/rohit1.jpg' %>" 
+      class="relative w-full rounded-2xl shadow-2xl border border-gray-100 object-cover max-h-[600px]"
+      alt="<%= project.title %> Screenshot"
+    >
+    
+    <!-- Action Buttons -->
+    <div class="flex flex-wrap justify-center gap-4 mt-10">
+      <% if(project.liveLink) { %>
+        <a href="<%= project.liveLink %>" target="_blank"
+           class="flex items-center gap-2 bg-gradient-to-r from-[#FA6920] to-orange-500 hover:shadow-[0_8px_20px_rgba(250,105,32,0.3)] text-white px-8 py-3 rounded-full font-semibold transition-all hover:-translate-y-1">
+           <i class="fa-solid fa-globe"></i> Live Preview
+        </a>
+      <% } %>
 
+      <% if(project.githubLink) { %>
+        <a href="<%= project.githubLink %>" target="_blank"
+           class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+           <i class="fa-brands fa-github text-lg"></i> Source Code
+        </a>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Details Content Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+    <!-- Left: Overview -->
+    <div class="reveal lg:col-span-2 space-y-6">
+      <h2 class="text-3xl font-bold text-gray-900 border-b border-gray-100 pb-4">
+        Project Overview
+      </h2>
+      <div class="text-gray-600 leading-relaxed whitespace-pre-line text-lg">
+        <%= project.fullDescription || project.description %>
+      </div>
+    </div>
+
+    <!-- Right: Features & Meta -->
+    <div class="reveal space-y-10">
+      <% if(project.features && project.features.length > 0) { %>
+      <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+          <i class="fa-solid fa-star text-orange-500"></i> Key Features
+        </h2>
+        <ul class="space-y-4">
+          <% project.features.forEach((feature) => { %>
+            <li class="flex items-start gap-3 text-gray-600">
+              <i class="fa-solid fa-check text-orange-500 mt-1 text-sm"></i>
+              <span class="leading-relaxed text-sm"><%= feature %></span>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+      <% } %>
+    </div>
+  </div>
 
 </section>

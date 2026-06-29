@@ -6,8 +6,17 @@ const ejsMate = require("ejs-mate");
 const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session")
-const dbUrl = process.env.MONGODB_URL
 const methodOverride = require("method-override")
+
+const dbUrl = process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/rohitPortfolio";
+const sessionSecret = process.env.SECRET || "thisshouldbeabettersecret";
+if (!process.env.MONGODB_URL) {
+  console.warn("WARNING: MONGODB_URL is not set. Using fallback local MongoDB URI.");
+}
+if (!process.env.SECRET) {
+  console.warn("WARNING: SECRET is not set. Using a development fallback secret.");
+}
+
 const homeRoute = require("./routes/homeRoute.js");
 const dashboardRoute = require("./routes/adminLoginRoute.js");
 const myWorkRoute = require("./routes/myWorkRoute.js");
@@ -21,7 +30,7 @@ const adminTaskRoute = require("./routes/adminTaskRoute.js")
 
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
     cookie: {
